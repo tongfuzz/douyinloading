@@ -153,7 +153,10 @@
     <color name="black">#000000</color> <!--黑色 -->
 
     <color name="grey">#808080</color><!--灰色 -->
-    <color name="grey_transparent">#b1808080</color><!--灰白色2 -->
+    <color name="grey_transparent">#ff808080</color><!--灰白色不透明度 -->
+    <color name="grey_transparent100">#00808080</color><!--灰白色全透明 -->
+
+
     <color name="grey1">#E3E3E3</color><!--灰白色 -->
     <color name="grey2">#f4f5fa</color><!--灰白色2 -->
     <color name="transparent">@android:color/transparent</color> <!-- 透明色 -->
