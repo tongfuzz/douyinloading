@@ -1,6 +1,7 @@
 package com.kk.tongfu.douyinloading.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -8,6 +9,11 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+
+import com.kk.tongfu.douyinloading.R;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by tongfu
@@ -21,6 +27,7 @@ public class LoadingView extends View {
     private int mWidth,mHeight;
     private int mDefaultWidth,mDefaultHeight;
     private int mProgressWidth;
+    private int mMinProgressWidth;
     private Paint mPaint;
     private String mColor;
 
@@ -34,14 +41,40 @@ public class LoadingView extends View {
 
     public LoadingView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        //设置view的默认最小宽度
+
+
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoadingView);
+        String color=typedArray.getString(R.styleable.LoadingView_progressColor);
+        mDefaultWidth = (int) typedArray.getDimension(R.styleable.LoadingView_minWidth, 600);
+        mDefaultHeight = (int) typedArray.getDimension(R.styleable.LoadingView_minHeight, 5);
+        mMinProgressWidth = (int) typedArray.getDimension(R.styleable.LoadingView_minProgressWidth, 100);
+        mProgressWidth=mMinProgressWidth;
+
+
+        String regularStr="^#[A-Fa-f0-9]{6}";
+        Pattern compile = Pattern.compile(regularStr);
+        if(color==null){
+            mColor="#808080";
+        }else{
+            Matcher matcher = compile.matcher(color);
+            if(matcher.matches()){
+                mColor=color;
+            }else{
+                throw new IllegalArgumentException("wrong color string type!");
+            }
+        }
+
+        typedArray.recycle();
+
+
+       /* //设置view的默认最小宽度
         mDefaultWidth=600;
         //设置view的默认最小高度
         mDefaultHeight=5;
         //设置进度条的初始宽度,这个宽度不能大于view的最小宽度，否则进度条不能向两边延伸
         mProgressWidth=100;
         //设置默认初始颜色
-        mColor="#808080";
+        mColor="#808080";*/
 
         mPaint=new Paint();
         //设置虎逼模式为填充带边框
@@ -115,7 +148,7 @@ public class LoadingView extends View {
             mProgressWidth+=10;//注意执行此步骤是mProgressWidth值有可能大于view宽度；
         }else{
             //如果进度条宽度大于view宽度将进度条宽度设置为初始宽度
-            mProgressWidth=100;
+            mProgressWidth=mMinProgressWidth;
         }
         //计算颜色透明度
         //mProgressWidth/mWidth 计算当前进度条宽度占总宽度的比例

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LoadingView">
+        <!--进度条初始颜色-->
+        <attr name="progressColor" format="string"></attr>
+        <!--进度条最小宽度即初始宽度-->
+        <attr name="minProgressWidth" format="dimension"></attr>
+        <!--view最小宽度-->
+        <attr name="minWidth" format="dimension"></attr>
+        <!--view最小高度-->
+        <attr name="minHeight" format="dimension"></attr>
+    </declare-styleable>
+</resources>

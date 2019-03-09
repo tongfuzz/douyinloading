@@ -54,6 +54,14 @@ onSizeChanged方法会在view的大小发生改变时调用，所以获取完vie
  <img width="300" height="500" src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/hehe.gif"/>
  </div>
 
+至此基本效果已经实现了，可能有的同学会说你这个最小宽度每次都要去修改，我想修改个颜色，修改个宽度，每次还要到源码中去修改，太麻烦，那么接下来我们就通过自定义属性，将一些经常更改的东西通过属性来提供
+
+---
+
+首先我们在values文件夹下创建attrs.xml文件，然后在其中定义相应的属性
+
+<img src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/view7.png" />
+
 
 
 
