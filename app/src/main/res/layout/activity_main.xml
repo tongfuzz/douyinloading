@@ -7,7 +7,14 @@
     tools:context=".MainActivity">
 
     <com.kk.tongfu.douyinloading.view.LoadingView
+        android:id="@+id/loadingView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:minHeight="15dp"
+        app:progressColor="#ff0000"
+        app:minProgressWidth="100dp"
+        app:minWidth="300dp"
+        />
 
 </RelativeLayout>

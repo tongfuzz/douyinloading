@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -30,6 +32,8 @@ public class LoadingView extends View {
     private int mMinProgressWidth;
     private Paint mPaint;
     private String mColor;
+    private Handler mHandler;
+    private int mTimePeriod=20;
 
     public LoadingView(Context context) {
         this(context,null);
@@ -42,7 +46,7 @@ public class LoadingView extends View {
     public LoadingView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-
+        //获取颜色值和最小宽高度，以及进度条最小宽度
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoadingView);
         String color=typedArray.getString(R.styleable.LoadingView_progressColor);
         mDefaultWidth = (int) typedArray.getDimension(R.styleable.LoadingView_minWidth, 600);
@@ -50,21 +54,22 @@ public class LoadingView extends View {
         mMinProgressWidth = (int) typedArray.getDimension(R.styleable.LoadingView_minProgressWidth, 100);
         mProgressWidth=mMinProgressWidth;
 
-
+        //根据正则表达式来判断颜色格式是否正确
         String regularStr="^#[A-Fa-f0-9]{6}";
         Pattern compile = Pattern.compile(regularStr);
         if(color==null){
             mColor="#808080";
         }else{
             Matcher matcher = compile.matcher(color);
-            if(matcher.matches()){
+            if(matcher.matches()){//如果颜色格式正确
                 mColor=color;
             }else{
+                //如果颜色格式不正确
                 throw new IllegalArgumentException("wrong color string type!");
             }
         }
-
         typedArray.recycle();
+
 
 
        /* //设置view的默认最小宽度
@@ -82,7 +87,27 @@ public class LoadingView extends View {
         //设置抗锯齿
         mPaint.setAntiAlias(true);
 
+        mHandler=new Handler(){
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                invalidate();
+                this.sendEmptyMessageDelayed(1,mTimePeriod);
+            }
+        };
+        mHandler.sendEmptyMessageDelayed(1,mTimePeriod);
 
+
+    }
+
+    /**
+     * 设置重绘的周期
+     * @param timePeriod
+     */
+    public void setTimePeriod(int timePeriod){
+        if(mTimePeriod>0) {
+            this.mTimePeriod = timePeriod;
+        }
     }
 
 
@@ -135,6 +160,10 @@ public class LoadingView extends View {
         super.onSizeChanged(w, h, oldw, oldh);
         mWidth=w;
         mHeight=h;
+        if(mWidth<mProgressWidth){
+            //如果宽度小于进度条的宽度
+            throw new IllegalArgumentException("the progressWidth must less than mWidth");
+        }
         mPaint.setStrokeWidth(mHeight);
     }
 
@@ -172,6 +201,5 @@ public class LoadingView extends View {
         mPaint.setColor(color);
         //使用canvas来画进度条（确实就是画一条线）
         canvas.drawLine(mWidth/2-mProgressWidth/2,mDefaultHeight/2,mWidth/2+mProgressWidth/2,mDefaultHeight/2,mPaint);
-        invalidate();
     }
 }

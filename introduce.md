@@ -54,13 +54,37 @@ onSizeChanged方法会在view的大小发生改变时调用，所以获取完vie
  <img width="300" height="500" src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/hehe.gif"/>
  </div>
 
-至此基本效果已经实现了，可能有的同学会说你这个最小宽度每次都要去修改，我想修改个颜色，修改个宽度，每次还要到源码中去修改，太麻烦，那么接下来我们就通过自定义属性，将一些经常更改的东西通过属性来提供
+至此基本效果已经实现了，可能有的同学会说你这个最小宽度每次都要去修改，我想修改个颜色，修改个宽度，每次还要到源码中去修改，太麻烦，那么接下来我们就通过自定义属性，将一些经常更改的东西通过属性来提供（关于自定义属性，可以参考[自定义属性](https://blog.csdn.net/liujian8654562/article/details/80389077)）
 
 ---
 
 首先我们在values文件夹下创建attrs.xml文件，然后在其中定义相应的属性
 
 <img src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/view7.png" />
+
+然后我们在view的构造函数中获取自定义属性值，并赋值给相关常量，并且根据正则表达式来判断值传入的是否正确，
+
+<img src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/view8.png" />
+
+接下来我们在xml布局中添加这些属性
+
+<img src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/view9.png" />
+
+然后运行项目，发现我们更改的属性已经生效
+
+<img src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/123.gif" />
+
+接下来我们来更改动画的执行时间，动画执行时间我们使用handler 来定时发送消息，并在接收到消息后再次发送，以达到循环执行的目的,然后对外提供方法更改重绘周期
+
+<img src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/view10.png" />
+
+我们通过findviewbyid找到此view，并设置间隔时间为100毫秒测试一下效果
+
+<img src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/1234.gif" />
+
+至此仿抖音loadingview基本就完成了，android小白，初次写博客，如有不足的地方望多多指教 本人邮箱suntongf@126.com  项目地址[Demo地址](https://github.com/tongfuzz/douyinloading)
+
+
 
 
 
