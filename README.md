@@ -72,7 +72,9 @@ onSizeChanged方法会在view的大小发生改变时调用，所以获取完vie
 
 然后运行项目，发现我们更改的属性已经生效
 
-<img src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/123.gif" />
+ <div align=center>
+ <img width="300" height="500" src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/123.gif"/>
+ </div>
 
 接下来我们来更改动画的执行时间，动画执行时间我们使用handler 来定时发送消息，并在接收到消息后再次发送，以达到循环执行的目的,然后对外提供方法更改重绘周期
 
@@ -80,7 +82,9 @@ onSizeChanged方法会在view的大小发生改变时调用，所以获取完vie
 
 我们通过findviewbyid找到此view，并设置间隔时间为100毫秒测试一下效果
 
-<img src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/1234.gif" />
+ <div align=center>
+ <img width="300" height="500" src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/1234.gif"/>
+ </div>
 
 至此仿抖音loadingview基本就完成了，android小白，初次写博客，如有不足的地方望多多指教 本人邮箱suntongf@126.com  项目地址[Demo地址](https://github.com/tongfuzz/douyinloading)
 
