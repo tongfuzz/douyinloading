@@ -4,7 +4,7 @@
   
   
   <div align=center>
- <img width="300" height="500" src="https://raw.githubusercontent.com/tongfuzz/douyinloading/master/app/screenshots/haha.gif"/>
+ <img width="300" height="500" src="app/screenshots/haha.gif"/>
  </div>
  
 ### 效果分析
